@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-6 text-gray-800">Feed de Publicações</h1>
+<div class="space-y-4">
+    {% for post in posts %}
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <a href="{% url 'user_profile' post.autor.username %}" class="text-blue-600 font-semibold hover:underline">@{{ post.autor.username }}</a>
+        <p class="text-gray-700 mt-2 text-lg">{{ post.conteudo }}</p>
+        <div class="mt-4 text-xs text-gray-400 flex justify-between">
+            <span>{{ post.criado_em|date:"d/m/Y H:i" }}</span>
+            <a href="{% url 'post_detail' post.id %}" class="text-blue-500 font-medium hover:underline">Ver comentários ({{ post.comentarios.count }})</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500 text-center">Ainda não há publicações. Cria um superuser e adiciona dados no /admin!</p>
+    {% endfor %}
+</div>
+{% endblock %}

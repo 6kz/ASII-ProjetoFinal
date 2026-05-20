@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{% url 'index' %}" class="text-sm text-blue-500 hover:underline">← Voltar ao Feed</a>
+<div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mt-4">
+    <a href="{% url 'user_profile' post.autor.username %}" class="text-blue-600 font-semibold">@{{ post.autor.username }}</a>
+    <p class="text-gray-800 mt-3 text-xl font-light">{{ post.conteudo }}</p>
+    <span class="text-xs text-gray-400 block mt-4">{{ post.criado_em|date:"d/m/Y H:i" }}</span>
+</div>
+
+<h3 class="text-lg font-bold mt-8 mb-4 text-gray-700">Comentários</h3>
+<div class="space-y-3">
+    {% for comentario in post.comentarios.all %}
+    <div class="bg-gray-50 p-4 rounded-lg border border-gray-150">
+        <span class="font-semibold text-sm text-gray-700">@{{ comentario.autor.username }}</span>
+        <p class="text-gray-600 text-sm mt-1">{{ comentario.conteudo }}</p>
+    </div>
+    {% empty %}
+    <p class="text-gray-400 text-sm italic">Nenhum comentário ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}
