@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: projeto_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    container_name: web_django
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - DJANGO_SECRET_KEY=chave-secreta-producao-docker-12345
+      - DJANGO_DEBUG=True
+      - ALLOWED_HOSTS=*
+      - USE_MYSQL=True
+      - DB_NAME=projeto_db
+      - DB_USER=db_user
+      - DB_PASSWORD=db_password
+      - DB_HOST=db
+      - DB_PORT=3306
+    depends_on:
+      - db
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  mysql_data:
