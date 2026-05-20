@@ -76,24 +76,16 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if os.getenv('USE_MYSQL', 'False') == 'True':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv('DB_NAME', 'projeto_db'),
-            'USER': os.getenv('DB_USER', 'root'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'root'),
-            'HOST': os.getenv('DB_HOST', 'db'), # nao esquecer colocar aqui o nome do serviço do docker compose
-            'PORT': os.getenv('DB_PORT', '3306'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME', 'projeto_db'),
+        'USER': os.environ.get('DB_USER', 'db_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'db_password'),
+        'HOST': os.environ.get('DB_HOST', 'db'), 
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation

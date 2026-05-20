@@ -1,19 +1,11 @@
 FROM python:3.10-slim AS base
 
-# DEFESA CONTRA ERROS DO MYSQL
-RUN apt-get update && apt-get install -y \
-    default-libmysqlclient-dev \
-    build-essential \
-    pkg-config \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
-RUN pip install --upgrade pip 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . /usr/src/app/
 
 EXPOSE 8000
 
