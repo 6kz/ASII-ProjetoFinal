@@ -128,6 +128,6 @@ ASII-ProjetoFinal/
 ---
 
 ## 👥 Autores
-Tomás Matos 2025125
-Gonçalo Castro 2025079
+Tomás Matos 2025125\n
+Gonçalo Castro 2025079\n
 Projeto Final para a UC de ASII — Maio 2026
