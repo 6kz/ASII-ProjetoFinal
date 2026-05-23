@@ -52,6 +52,7 @@ Este projeto é uma aplicação web desenvolvida em Django, servindo como projet
    ```bash
    python -m venv venv
    ```
+   ```bash
    venv\Scripts\activate
    ```
 
